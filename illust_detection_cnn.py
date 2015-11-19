@@ -12,7 +12,7 @@ from keras.utils import np_utils, generic_utils
 from six.moves import range
 
 import illust_dataset as wd
-
+from batch_iterator import BatchIterator
 
 
 '''
@@ -86,7 +86,19 @@ X_test /= 255
 
 if not data_augmentation:
     print("Not using data augmentation or normalization")
-    model.fit(X_train, Y_train, batch_size=batch_size, nb_epoch=nb_epoch)
+    #model.fit(X_train, Y_train, batch_size=batch_size, nb_epoch=nb_epoch)
+    # Alternatively, let's say you have a MiniBatchGenerator that yields 32-64 samples at a time:
+    for e in range(nb_epoch):
+        print("epoch %d" % e)
+        b = BatchIterator(X_train, Y_train, 16)
+        X_batch, Y_batch = b.next()
+
+        while X_batch != None and Y_batch != None:
+            X_batch, Y_batch = b.next()
+            model.train(X_batch, Y_batch)
+        #for X_train, Y_train in BatchIterator(): # these are chunks of ~10k pictures
+        #    model.train(X_batch, Y_batch)
+
     score = model.evaluate(X_test, Y_test, batch_size=batch_size)
     print('Test score:', score)
 

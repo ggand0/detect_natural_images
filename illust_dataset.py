@@ -10,14 +10,9 @@ import collections
 import csv
 
 
-class IllustBatchGenerator:
-    def __init__(self, n):
-        self.n = n
-        self.num, self.nums = 0, []
-    
-    def __iter__(self):
-        return self
 
+#FILE='nn_train_data.json'
+FILE='nn_train_data_paths.json'
 
 # reshape img array to (rgb, location(1D))
 def change_img_array_shape(imgs):
@@ -32,7 +27,7 @@ def change_img_array_shape(imgs):
         for col in img:
             if index % 3 == 0:#R
                 #print col
-                
+
                 new_img[0].append(col)
                 #print index
                 #print new_img[0]
@@ -45,7 +40,7 @@ def change_img_array_shape(imgs):
                 new_img[2].append(col)
                 #np.append(new_img[2], col)
             index += 1
-        
+
         new_img = np.array(new_img)
         result.append(new_img.reshape(3,64,64))
         #print new_img.shape# => (3, 4096)
@@ -59,16 +54,15 @@ def change_img_array_shape(imgs):
 def load_file():
     illust=[]
     real=[]
-    with open('nn_train_data.json') as data_file:
+    with open(FILE) as data_file:
         org = json.load(data_file)
 
     train = np.array(org['imgs'])
     print train[0].shape
     print train[0][0]
     print train[0][1]
-    train = change_img_array_shape(train)
-
-    #train = [ img.reshape((64,64,3)) for img in train]
+    # read image paths, not img itself since it's too large
+    #train = change_img_array_shape(train)
     print train.shape
 
     labels = org['ids']
@@ -92,7 +86,7 @@ def load_data():
 
     # unzip it
     imgs, labels = zip(*data)
-    
+
     nb_test_samples = 1000#10000
     nb_train_samples = len(data)-nb_test_samples
 
