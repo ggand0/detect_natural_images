@@ -55,6 +55,8 @@ real_ids = np.empty(len(cleaned_imgs_real))
 sketch_ids.fill(1)
 real_ids.fill(0)
 
+#print real_ids.tolist()+sketch_ids.tolist()
+
 train_data={
     "imgs":cleaned_imgs_real+cleaned_imgs_sketch,
     "ids":real_ids.tolist()+sketch_ids.tolist()
