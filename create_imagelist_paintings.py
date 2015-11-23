@@ -25,10 +25,10 @@ real_path='real'
 #paint_files = [ f for f in listdir(paint_path) if isfile(join(paint_path,f)) ]
 paint_files = [os.path.join(dp, f) for dp, dn, filenames in os.walk(paint_path) for f in filenames]
 real_files = [os.path.join(dp, f) for dp, dn, filenames in os.walk(real_path) for f in filenames if os.path.splitext(f)[1] == '.jpg']
-sketch_dirs = [x[0] for x in os.walk(sketch_path)]
+#sketch_dirs = [x[0] for x in os.walk(sketch_path)]
 sketch_images=[]
-with open('sketch/filelist.txt') as f:
-    sketch_image = f.read().splitlines()
+#with open('sketch/filelist.txt') as f:
+#    sketch_image = f.read().splitlines()
 image_paths_sketch = []
 image_paths_real = []
 image_paths_paint = []
@@ -49,7 +49,15 @@ print image_paths_real[0]
 print 'searching paintings...'
 print paint_files[0]
 for idx, filepath in enumerate(paint_files):
-    image_paths_paint.append(dir_path + '/' + filepath)
+    if not ' ' in filepath:
+	# check if the file is corrupt
+	#import cv
+	import cv2
+	img = cv2.imread(filepath, cv2.CV_LOAD_IMAGE_COLOR)
+	if not img is None:
+            image_paths_paint.append(dir_path + '/' + filepath)
+	else:
+	    print 'corrupt jpg file %s' % filepath
     #image_paths_paint.append(filepath)
     if idx == NUM_SKETCH-1:
         break

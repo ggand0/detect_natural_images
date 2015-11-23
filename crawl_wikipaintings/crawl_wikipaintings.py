@@ -1,7 +1,7 @@
 import csv
 
 
-EXTRACT_NUM=20000
+EXTRACT_NUM=50000
 with open('wikipaintings_oct2013.csv', 'rb') as f:
     reader = csv.reader(f)
     df = list(reader)
@@ -23,13 +23,14 @@ q = Queue(connection=conn)
 import time
 
 # Create dirs and save images
-dir_path = '/home/ispick/Projects/illust_detection/detect_natural_images/wikipaintings' # an absolute path is needed
+#dir_path = '/home/ispick/Projects/illust_detection/detect_natural_images/wikipaintings' # an absolute path is needed
+dir_path = '/home/ubuntu/Projects/detect_natural_images/wikipaintings' # an absolute path is needed
 
 #def save_image(image_url, image_path):
 #    img = imread(image_url)
 #    matplotlib.image.imsave(image_path, img)
 
-for index in xrange(15000,EXTRACT_NUM):# since raw 0 has headers
+for index in xrange(1,EXTRACT_NUM):# since raw 0 has headers
     name = df[index][image_id_idx]
     style = df[index][style_idx]
     style_path = dir_path + '/' + style
