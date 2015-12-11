@@ -1,3 +1,6 @@
+.DS_Store
+documents
+
 bak
 sketch
 clipart
@@ -6,3 +9,5 @@ real
 train-testDataset
 wikipaintings
 *.pyc
+.caffemodel
+.solverstate
