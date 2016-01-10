@@ -9,6 +9,9 @@ flickr30k-images
 real
 train-testDataset
 wikipaintings
+cosplay_images
+single_characters_10000
+
 *.pyc
 .caffemodel
 .solverstate

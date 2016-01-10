@@ -15,18 +15,20 @@ from random import shuffle
 
 IMAGE_PER_CLASS=5
 NUM_SKETCH=10000
-NUM_VAL=5000#10000
-paint_path='/home/ispick/Projects/images/single_characters_10000'
-#paint_path='single_characters_10000'
+NUM_VAL=10000
+#paint_path='/home/ispick/Projects/images/single_characters_10000'
+paint_path='single_characters_10000'
 real_path='real'
 
 
 paint_files = [os.path.join(dp, f) for dp, dn, filenames in os.walk(paint_path) for f in filenames]
-real_files = [os.path.join(dp, f) for dp, dn, filenames in os.walk(real_path) for f in filenames if os.path.splitext(f)[1] == '.jpg']
+#real_files = [os.path.join(dp, f) for dp, dn, filenames in os.walk(real_path) for f in filenames if os.path.splitext(f)[1] == '.jpg']
+real_files = [os.path.join(dp, f) for dp, dn, filenames in os.walk(real_path) for f in filenames]
 image_paths_sketch = []
 image_paths_real = []
 image_paths_paint = []
-
+print len(paint_files)
+print len(real_files)
 
 dir_path = os.getcwd()
 print 'searching real images...'
