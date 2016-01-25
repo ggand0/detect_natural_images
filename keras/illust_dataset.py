@@ -11,8 +11,9 @@ import csv
 from PIL import Image
 
 IMG_SIZE=128
-sketch_path='sketch'
+sketch_path='single_characters_10000'#'sketch'
 real_path='real'
+
 def load_test_images(img_paths, ids):
     imgs=[]
     # Load img arrays

@@ -1,7 +1,11 @@
 .DS_Store
 documents
+*.pem
 
 bak
+datasets
+illust-cosplay*
+bof_data
 sketch
 clipart
 clipart-benchmark
